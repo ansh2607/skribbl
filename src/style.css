@@ -10,6 +10,23 @@ body {
 /* Home.js */
 .room-join-buttons {
   margin: 1rem;
+  padding: 0.5rem;
+}
+.home-header {
+  text-align: center;
+  margin: 1rem;
+  margin-top: 100px;
+}
+.create-room {
+  margin: 1rem;
+  margin-left: 500px;
+}
+.room-input {
+  margin: 1rem;
+  padding: 0.5rem;
+}
+.name-input {
+  padding: 0.5rem;
 }
 
 /* Chat.js */

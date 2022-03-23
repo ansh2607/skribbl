@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <>
-      <h1>Scribble Home Page</h1>
+      <h1 className="home-header">Scribble Home Page</h1>
       <div className="create-room">
         <form onSubmit={sumbitForm}>
           <input
