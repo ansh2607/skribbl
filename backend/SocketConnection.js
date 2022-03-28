@@ -22,6 +22,9 @@ class Connection {
     socket.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
     });
+    socket.on("canvas-draw", (commands, room) =>
+      this.drawOnCanvas(commands, room)
+    );
   }
 
   createRoom(userName, setRoomIdFunction) {
@@ -60,6 +63,10 @@ class Connection {
       messages.delete(message);
       this.io.sockets.emit("deleteMessage", message.id);
     }, 10 * 60 * 1000);
+  }
+
+  drawOnCanvas(commands, room) {
+    this.socket.broadcast.to(room).emit("canvas-draw", commands);
   }
 }
 

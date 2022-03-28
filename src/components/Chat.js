@@ -48,8 +48,8 @@ export default function Chat() {
 
   return (
     <>
-      <h1>Chat</h1>
       <div className="chat-container">
+        <h1 className="chat-header">Chat</h1>
         <Messages />
         <form onSubmit={submitForm}>
           <input
