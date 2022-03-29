@@ -3,22 +3,34 @@ import {
   setStartX,
   setStartY,
   setErase,
+  setPenColor,
+  setLineWidth,
 } from "./store/CanvasStore";
 
-export function drawOnCanvas(context, startX, startY, currentX, currentY) {
-  context.current.fillStyle = "rgb(255, 255, 255)";
+export function drawOnCanvas(
+  context,
+  startX,
+  startY,
+  currentX,
+  currentY,
+  color,
+  width
+) {
+  context.current.fillStyle = color;
+  context.current.strokeStyle = color;
   context.current.beginPath();
   context.current.moveTo(startX, startY);
   context.current.lineTo(currentX, currentY);
+  context.current.lineWidth = width;
   context.current.stroke();
 }
 
-export function setLineWidth(context, n) {
-  context.current.lineWidth = n;
+export function changeLineWidth(dispatch, width) {
+  dispatch(setLineWidth(width));
 }
 
-export function setPaintColor(context, color) {
-  context.current.strokeStyle = color;
+export function changePenColor(dispatch, color) {
+  dispatch(setPenColor(color));
 }
 
 export function setStartPositon(dispatch, coordinates) {
@@ -39,8 +51,8 @@ export function selectEraser(dispatch) {
   dispatch(setErase(true));
 }
 
-export function eraseOnCanvas(context, currentX, currentY) {
-  context.current.fillStyle = "rgb(255, 255, 255)";
+export function eraseOnCanvas(context, currentX, currentY, color) {
+  context.current.fillStyle = color;
   context.current.fillRect(currentX, currentY, 20, 20);
 }
 

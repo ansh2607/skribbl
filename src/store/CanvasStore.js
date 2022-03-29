@@ -3,6 +3,9 @@ const CANVAS_DRAW = "canvas/draw";
 const START_POS_X = "canvas/start/x";
 const START_POS_Y = "canvas/start/y";
 const CANVAS_ERASE = "canvas/erase";
+const PEN_COLOR = "pen/color";
+const BACKGROUND_COLOR = "background/color";
+const LINE_WIDTH = "line/width";
 
 // ACTIONS
 export const setDrawing = (value) => {
@@ -30,6 +33,27 @@ export const setErase = (value) => {
   return {
     type: CANVAS_ERASE,
     payload: value,
+  };
+};
+
+export const setPenColor = (color) => {
+  return {
+    type: PEN_COLOR,
+    payload: color,
+  };
+};
+
+export const setBackgroundColor = (color) => {
+  return {
+    type: BACKGROUND_COLOR,
+    payload: color,
+  };
+};
+
+export const setLineWidth = (width) => {
+  return {
+    type: LINE_WIDTH,
+    payload: width,
   };
 };
 
@@ -61,6 +85,24 @@ export default function reducer(
       return {
         ...state,
         erase: action.payload,
+      };
+    }
+    case PEN_COLOR: {
+      return {
+        ...state,
+        penColor: action.payload,
+      };
+    }
+    case BACKGROUND_COLOR: {
+      return {
+        ...state,
+        backgroundColor: action.payload,
+      };
+    }
+    case LINE_WIDTH: {
+      return {
+        ...state,
+        lineWidth: action.payload,
       };
     }
     default: {
