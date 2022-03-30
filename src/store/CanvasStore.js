@@ -59,7 +59,15 @@ export const setLineWidth = (width) => {
 
 // REDUCER
 export default function reducer(
-  state = { drawing: false, erase: false, startX: 0, startY: 0 },
+  state = {
+    drawing: false,
+    erase: false,
+    startX: 0,
+    startY: 0,
+    penColor: "rgb(0, 0, 0)",
+    backgroundColor: "rgb(255, 255, 255)",
+    lineWidth: 1,
+  },
   action
 ) {
   switch (action.type) {

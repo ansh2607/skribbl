@@ -25,14 +25,15 @@ export default function Canvas() {
     backgroundColor,
     lineWidth,
   } = useSelector((state) => state.CanvasStore);
+
   let batch = [];
   let isRequestTimed = false;
 
   const canvasRef = useRef(null);
   const context = useRef(null);
 
-  function sendDrawCommand(command, currentX, currentY) {
-    batch.push([command, startX, startY, currentX, currentY]);
+  function sendDrawCommand(command, currentX, currentY, color, lineWidth) {
+    batch.push([command, startX, startY, currentX, currentY, color, lineWidth]);
     if (!isRequestTimed) {
       setTimeout(() => {
         socket.emit("canvas-draw", batch, roomId);
@@ -50,7 +51,7 @@ export default function Canvas() {
     if (drawing) {
       if (erase) {
         eraseOnCanvas(context, currentX, currentY, backgroundColor);
-        sendDrawCommand(1, currentX, currentY);
+        sendDrawCommand(1, currentX, currentY, backgroundColor, lineWidth);
       } else {
         drawOnCanvas(
           context,
@@ -61,7 +62,7 @@ export default function Canvas() {
           penColor,
           lineWidth
         );
-        sendDrawCommand(0, currentX, currentY);
+        sendDrawCommand(0, currentX, currentY, penColor, lineWidth);
         dispatch(setStartX(currentX));
         dispatch(setStartY(currentY));
       }
@@ -85,12 +86,11 @@ export default function Canvas() {
             command[2],
             command[3],
             command[4],
-            penColor,
-            lineWidth
+            command[5],
+            command[6]
           );
-          // setLineWidth(context, ctx.lineWidth, command[3], command[4]);
         } else if (command[0] === 1) {
-          eraseOnCanvas(context, command[3], command[4], backgroundColor);
+          eraseOnCanvas(context, command[3], command[4], command[5]);
         } else if (command[0] === 2) {
           clearCanvas(context, canvasRef.current);
         }
@@ -122,28 +122,19 @@ export default function Canvas() {
           </div>
           <div
             className="tool stroke1"
-            onClick={() => {
-              changeLineWidth(dispatch, 1);
-              // sendDrawCommand(0, 0, 0);
-            }}
+            onClick={() => changeLineWidth(dispatch, 1)}
           >
             1
           </div>
           <div
             className="tool stroke2"
-            onClick={() => {
-              changeLineWidth(dispatch, 3);
-              // sendDrawCommand(0, 0, 0);
-            }}
+            onClick={() => changeLineWidth(dispatch, 3)}
           >
             2
           </div>
           <div
             className="tool stroke3"
-            onClick={() => {
-              changeLineWidth(dispatch, 5);
-              // sendDrawCommand(0, 0, 0);
-            }}
+            onClick={() => changeLineWidth(dispatch, 5)}
           >
             3
           </div>
@@ -154,7 +145,7 @@ export default function Canvas() {
             className="tool clear"
             onClick={() => {
               clearCanvas(context, canvasRef.current);
-              sendDrawCommand(2, 0, 0);
+              sendDrawCommand(2, 0, 0, "rgb(255,255,255)", 0);
             }}
           >
             Clear
@@ -163,45 +154,31 @@ export default function Canvas() {
         <div className="tool color-picker">
           <div
             className="tool paint-red"
-            onClick={() => {
-              changePenColor(dispatch, "rgb(255, 0, 0)");
-            }}
+            onClick={() => changePenColor(dispatch, "rgb(255, 0, 0)")}
           ></div>
           <div
             className="tool paint-black"
-            onClick={() => {
-              changePenColor(dispatch, "rgb(0, 0, 0)");
-            }}
+            onClick={() => changePenColor(dispatch, "rgb(0, 0, 0)")}
           ></div>
           <div
             className="tool paint-blue"
-            onClick={() => {
-              changePenColor(dispatch, "rgb(0, 0, 255)");
-            }}
+            onClick={() => changePenColor(dispatch, "rgb(0, 0, 255)")}
           ></div>
           <div
             className="tool paint-green"
-            onClick={() => {
-              changePenColor(dispatch, "rgb(0, 156, 0)");
-            }}
+            onClick={() => changePenColor(dispatch, "rgb(0, 156, 0)")}
           ></div>
           <div
             className="tool paint-yellow"
-            onClick={() => {
-              changePenColor(dispatch, "rgb(255, 255, 0)");
-            }}
+            onClick={() => changePenColor(dispatch, "rgb(255, 255, 0)")}
           ></div>
           <div
             className="tool paint-orange"
-            onClick={() => {
-              changePenColor(dispatch, "rgb(255, 128, 0)");
-            }}
+            onClick={() => changePenColor(dispatch, "rgb(255, 128, 0)")}
           ></div>
           <div
             className="tool paint-magenta"
-            onClick={() => {
-              changePenColor(dispatch, "rgb(255, 0, 255)");
-            }}
+            onClick={() => changePenColor(dispatch, "rgb(255, 0, 255)")}
           ></div>
         </div>
       </div>
