@@ -18,8 +18,54 @@ body {
   margin-top: 100px;
 }
 .create-room {
-  margin: 1rem;
-  margin-left: 500px;
+  display: block;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.avatars {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choose__avatar {
+  font-size: 28px;
+}
+
+.avatar__container {
+  margin-left: 5px;
+  /* border: 1px solid black; */
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  width: 510px;
+  justify-content: space-evenly;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.avatar__select {
+  padding: 5px;
+  width: 8rem;
+  height: 8rem;
+  cursor: pointer;
+  transition: background-color 250ms ease-in-out;
+}
+.avatar__select:hover {
+  filter: brightness(50%);
+}
+.avatar-selected {
+  filter: brightness(50%);
+}
+
+.form_info {
+  flex: 5;
+  display: inline-block;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 450px;
 }
 .room-input {
   margin: 1rem;
@@ -27,6 +73,92 @@ body {
 }
 .name-input {
   padding: 0.5rem;
+}
+
+/* Lobby.js */
+
+.lobby {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  align-self: center;
+}
+
+.start {
+  flex: 4;
+  align-self: center;
+  max-width: 300px;
+  max-height: 60px;
+  font-family: "Nunito", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  border: none;
+  border-radius: 5rem;
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+}
+.start::before {
+  content: "";
+  border-radius: 5rem;
+  min-width: calc(300px + 12px);
+  min-height: calc(60px + 12px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out 0s;
+}
+.start:hover {
+  transform: translateY(-6px);
+}
+.start:hover::before {
+  opacity: 1;
+}
+.start:focus {
+  transform: translateY(-6px);
+}
+.start:focus::before {
+  opacity: 1;
+}
+
+.lobby__info {
+  display: flex;
+}
+
+.players {
+  font-size: 10px;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  justify-content: center;
+  align-items: flex-end;
+}
+.player_show {
+  flex: 1;
+  display: grid;
+  justify-items: center;
+}
+.player__avatar {
+  width: 5.5rem;
+  height: auto;
+  cursor: pointer;
+  width: min(12.5em, 100%);
+  min-width: 7.5em;
+  transition: ease-in-out;
+}
+.player__avatar:hover {
+  transform: scale(125%);
 }
 
 /* Chat.js */
@@ -83,7 +215,7 @@ button {
 }
 
 /* MessageInput.js */
-form {
+.chat-box {
   max-width: 500px;
   width: 100%;
 }

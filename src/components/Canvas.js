@@ -15,7 +15,8 @@ import {
 
 export default function Canvas() {
   const dispatch = useDispatch();
-  const { socket, roomId } = useSelector((state) => state.GameStore);
+  const { socket } = useSelector((state) => state.PlayerStore);
+  const { roomId } = useSelector((state) => state.GameStore);
   const {
     drawing,
     erase,

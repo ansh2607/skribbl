@@ -37,7 +37,8 @@ export default function Chat() {
   //   });
   // }
 
-  const { socket, roomId } = useSelector((state) => state.GameStore);
+  const { socket } = useSelector((state) => state.PlayerStore);
+  const { roomId } = useSelector((state) => state.GameStore);
   const [value, setValue] = useState("");
 
   const submitForm = (e) => {
@@ -51,7 +52,7 @@ export default function Chat() {
       <div className="chat-container">
         <h1 className="chat-header">Chat</h1>
         <Messages />
-        <form onSubmit={submitForm}>
+        <form className="chat-box" onSubmit={submitForm}>
           <input
             className="message-input"
             autoFocus

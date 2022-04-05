@@ -1,10 +1,12 @@
 import { createStore, combineReducers } from "redux";
-import GameReducder from "./GameStore";
-import CanvasReduces from "./CanvasStore";
+import GameReducer from "./GameStore";
+import CanvasReducer from "./CanvasStore";
+import PlayerReducer from "./PlayerStore";
 
 const reducer = combineReducers({
-  GameStore: GameReducder,
-  CanvasStore: CanvasReduces,
+  GameStore: GameReducer,
+  CanvasStore: CanvasReducer,
+  PlayerStore: PlayerReducer,
 });
 
 const store = createStore(reducer);

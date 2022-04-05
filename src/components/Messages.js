@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Messages() {
-  const { socket } = useSelector((state) => state.GameStore);
+  const { socket } = useSelector((state) => state.PlayerStore);
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
