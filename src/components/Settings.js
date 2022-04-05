@@ -27,7 +27,7 @@ export default function Settings() {
 
   return (
     <div className="room-settings">
-      <div className="settings__title">Room Settings</div>
+      <div className="settings__title">Lobby</div>
       <div className="settings__subtitle">Number of rounds</div>
       <select
         className="setting__select"
